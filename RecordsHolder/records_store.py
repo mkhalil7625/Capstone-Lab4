@@ -46,7 +46,7 @@ class RecordsStore:
             cur = self._db.cursor()
             search = f'%{name.upper()}%'
             cur.execute('SELECT * FROM '+
-                        table+' where UPPER ('+col1+') like ?',(search))
+                        table+' WHERE UPPER ('+col1+') like ?', (search,))
             return self._cursor_to_recordlist(cur)
 
         def _cursor_to_recordlist(self,cur):
@@ -54,7 +54,7 @@ class RecordsStore:
         def _row_to_record(self, row):
             if not row:
                 return None
-            record = Record(row['playerName'], row['country'], row['catches'])
+            record = Record(row[col1], row[col2], row[col3])
 
             return record
 

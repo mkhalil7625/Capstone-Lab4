@@ -28,5 +28,10 @@ def ask_question(question):
     :returns: user's response """
     return input(question)
 
-
+def show_records(records):
+    if records:
+        for record in records:
+            print(record)
+        else:
+            print('None to display')
 
