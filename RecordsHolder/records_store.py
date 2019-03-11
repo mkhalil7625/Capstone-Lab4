@@ -54,14 +54,35 @@ class RecordsStore:
         def _row_to_record(self, row):
             if not row:
                 return None
-            record = Record(row[col1], row[col2], row[col3])
+            record = Record(row[col1], row[col2], row[col3], row['rowid'])
 
             return record
 
 
 
 # You should be able to update the number of catches for a record holder.
+        def update_number_of_catches(self, name, new_number):
+            try:
+                with self._db as db:
+                    cur = db.cursor()
+                    search = f'%{name.upper()}%'
+                    cur.execute('UPDATE recordHolders SET catches = ? WHERE UPPER(playerName) like ?', (new_number, search))
+            except sqlite3.Error as e:
+                raise RecordError('Error setting new record ') from e
+
+
 # And, you should be able to delete a record, by record holder's name (for example, if a person's record was found to be invalid).
+
+        def get_all_records(self):
+            try:
+                cur = self._db.cursor()
+                cur.execute('SELECT rowid, * FROM '+table)
+                return self._cursor_to_recordlist(cur)
+
+            except sqlite3.Error as e:
+                raise RecordError('Error getting all records') from e
+
+
 
     def __new__(cls):
         if not RecordsStore.instance:
