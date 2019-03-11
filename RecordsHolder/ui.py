@@ -32,6 +32,6 @@ def show_records(records):
     if records:
         for record in records:
             print(record)
-        else:
-            print('None to display')
+    else:
+        print('None to display')
 

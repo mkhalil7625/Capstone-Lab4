@@ -72,6 +72,16 @@ class RecordsStore:
 
 
 # And, you should be able to delete a record, by record holder's name (for example, if a person's record was found to be invalid).
+        def delete_record_holder(self, name):
+            try:
+                with self._db as db:
+                    cur = db.cursor()
+                    search = f'%{name.upper()}'
+                    cur.execute('DELETE FROM '+table+' WHERE UPPER ('+col1+') like ?', (name,))
+            except sqlite3.Error as e:
+                raise RecordError('Error setting new record ') from e
+
+
 
         def get_all_records(self):
             try:

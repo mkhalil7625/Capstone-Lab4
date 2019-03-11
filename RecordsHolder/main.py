@@ -24,6 +24,7 @@ def create_menu():
     menu.add_option('2', 'Search For Record Holder', search_record_holder)
     menu.add_option('3', 'Show all Plyers', show_all_players)
     menu.add_option('4', 'Update a Record', update_record)
+    menu.add_option('5', 'Delete a Record', delete_record)
     menu.add_option(QUIT, 'Quit', quit_program)
 
     return menu
@@ -46,6 +47,10 @@ def update_record():
     new_number_of_catches = int(ui.ask_question('Enter number of catches: '))
     # matches = store.record_holder_search(search_term)
     store.update_number_of_catches(search_term, new_number_of_catches)
+
+def delete_record():
+    search_term = ui.ask_question('Enter the name of the player you want to delete')
+    store.delete_record_holder(search_term)
 
 def quit_program():
     ui.message('Thanks and bye!')
