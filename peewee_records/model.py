@@ -16,6 +16,9 @@ class Record(Model):
         #     (('name','country'),True ),
         # )
 
+    def __str__(self):
+        return f'ID {self.id}, Player Name: {self.name}, Country: {self.country}, No of Catches: {self.catches}'
+
 
 
 db.connect()

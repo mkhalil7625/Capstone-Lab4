@@ -19,12 +19,12 @@ def record_holder_search(name):
 
 # You should be able to update the number of catches for a record holder.
 def update_number_of_catches( name, new_number):
-    rows_updated = Record.update(number = new_number).where(Record.name==name).execut()
+    rows_updated = Record.update(catches = new_number).where(Record.name==name).execute()
     if not rows_updated:
         raise RecordError
 # And, you should be able to delete a record, by record holder's name (for example, if a person's record was found to be invalid).
 def delete_record_holder( name):
-    rows_deleted = Record.delete().where(Record.name==name).execut()
+    rows_deleted = Record.delete().where(Record.name==name).execute()
     if not rows_deleted:
         raise RecordError
 
